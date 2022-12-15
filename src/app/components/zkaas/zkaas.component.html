@@ -1,0 +1,21 @@
+<mat-tab-group (selectedTabChange)="selectedTab($event)" class="zk__tabs">
+  <mat-tab label="Prover">
+    <!-- ZK statement (WASM file): <input> <br><br>
+    Witness (Input 1): <input><br><br>
+    Witness (Input 2): <input><br><br>
+
+    <button mat-raised-button color="primary" onclick="zkRun()">Generate Proof</button><br><br>
+    <button mat-raised-button color="primary">Download Proof</button> -->
+    
+  </mat-tab>
+  <mat-tab label="Verifier">
+    <!-- ZK statement (WASM file): <input><br><br>
+    Witness (Input 1): <input><br><br>
+    Witness (Input 2): <input><br><br>
+    <button mat-raised-button color="primary">Upload Proof</button><br><br> -->
+  </mat-tab>
+</mat-tab-group>
+
+<div id="client">
+    <iframe id="client_wasm"></iframe>
+  </div>

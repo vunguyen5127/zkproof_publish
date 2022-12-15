@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-tab-label {
+    background: linear-gradient(1deg, rgb(60 61 179) 0%, rgb(157 198 239) 100%) !important;
+    height: 40px !important;
+    color: white !important;
+    opacity: 1 !important
+}
+
+.mat-tab-label-active{
+    background: #226bd9 !important;
+}

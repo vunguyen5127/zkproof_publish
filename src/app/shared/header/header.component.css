@@ -1,0 +1,12 @@
+
+.mat-toolbar{
+    /* background: linear-gradient(16deg, rgb(0 136 255) 0%, rgb(232 244 255) 100%) !important; */
+    background: linear-gradient(181deg, rgb(0 136 255) 0%, rgb(232 244 255) 100%) !important;
+    
+    /* background: none !important; */
+    /* color: #fff; */
+}
+
+.header_text{
+    margin-left: 5px;
+}
