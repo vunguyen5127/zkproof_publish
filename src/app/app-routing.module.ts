@@ -4,9 +4,9 @@ import { HomeComponent } from './components/home/home.component';
 import { ZkaasComponent } from './components/zkaas/zkaas.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'zkaas', pathMatch: 'full' },
-  { path: 'zkaas', component: ZkaasComponent },
-  { path: 'home', component: HomeComponent }
+  // { path: '', redirectTo: 'zkaas', pathMatch: 'full' },
+  // { path: 'zkaas', component: ZkaasComponent },
+  // { path: 'home', component: HomeComponent }
 ];
 
 @NgModule({

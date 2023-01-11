@@ -19,7 +19,7 @@
       <tr>
         <tr>
           <td class="zk_td_custom">ZK statement (WASM file):</td>
-          <td><input type="text"  placeholder="" id="parameter"></td>
+          <td><input type="file" id="wasmUpload" name="wasmUpload" class="fileUpload"></td>
         </tr>
         <td class="zk_td_custom">Witness (Input 1):</td>
         <td><input type="text" id="parameter1" placeholder="Input 1"></td>
@@ -32,13 +32,17 @@
         <td class="zk_td_custom">Upload Proof:</td>
         <td ><input type="file" id="uploadProof" name="uploadProof" class="fileUpload"></td>
       </tr>
+      <tr>
+        <td><button class="button" type="button" onclick="zkVerifier()">Verify</button></td>
+        <td></td>
+      </tr>
     </table>
   </div>
   <textarea id="output" rows="8"></textarea>
   <script type='text/javascript'>
     var statusElement = document.getElementById('status');
     var progressElement = document.getElementById('progress');
-    var spinnerElement = document.getElementById('spinner');
+    // var spinnerElement = document.getElementById('spinner');
 
     var Module = {
       preRun: [],
@@ -84,12 +88,12 @@
           progressElement.value = parseInt(m[2]) * 100;
           progressElement.max = parseInt(m[4]) * 100;
           progressElement.hidden = false;
-          spinnerElement.hidden = false;
+          // spinnerElement.hidden = false;
         } else {
           progressElement.value = null;
           progressElement.max = null;
           progressElement.hidden = true;
-          if (!text) spinnerElement.style.display = 'none';
+          // if (!text) spinnerElement.style.display = 'none';
         }
         statusElement.innerHTML = text;
       },
@@ -101,9 +105,10 @@
     };
     Module.setStatus('Downloading...');
     window.onerror = function (event) {
+      arguments_ = [];
       // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
       Module.setStatus('Exception thrown, see JavaScript console');
-      spinnerElement.style.display = 'none';
+      // spinnerElement.style.display = 'none';
       Module.setStatus = function (text) {
         if (text) console.error('[post-exception status] ' + text);
       };
@@ -124,22 +129,24 @@
         Module['FS'].writeFile(fileName, int8a);
 
         // to do something:
-        callMain(arguments_);
+        arguments_.push(fileName);
+        //callMain(arguments_);
         // shouldRunNow = true;
         //  run();
       };
       reader.readAsArrayBuffer(file);  // Blob object
     }
 
+    document.getElementById('wasmUpload').addEventListener('change', readSingleFile, false);
     document.getElementById('uploadProof').addEventListener('change', readSingleFile, false);
-
-	  // function doupload() {
-	  // 	  var file = document.getElementById('file')[0];
-	  // 	  var js = document.createElement('script');
-	  // 	  js.type = 'text/javascript';
-	  // 	  js.src = 'verifier.js';
-
-	  // }
+	  
+    function zkVerifier(){
+      param1 = document.getElementById("parameter1").value;
+      param2 = document.getElementById("parameter2").value;
+      if(param1 !="") arguments_.push(param1);
+      if(param2 !="") arguments_.push(param2);
+      callMain(arguments_);
+    }
   </script>
   <script async type="text/javascript" src="verifier.js"></script>
 </body>

@@ -39,12 +39,13 @@
 
     <script type='text/javascript'>
       var statusElement = document.getElementById('status');
-      var progressElement = document.getElementById('progress');
-      var spinnerElement = document.getElementById('spinner');
+      // var progressElement = document.getElementById('progress');
+      // var spinnerElement = document.getElementById('spinner');
 
       var Module = {
         preRun: [],
         postRun: [],
+        noInitialRun: true,
         print: (function() {
           var element = document.getElementById('output');
           if (element) element.value = ''; // clear browser cache
@@ -82,15 +83,15 @@
           Module.setStatus.last.text = text;
           if (m) {
             text = m[1];
-            progressElement.value = parseInt(m[2])*100;
-            progressElement.max = parseInt(m[4])*100;
-            progressElement.hidden = false;
-            spinnerElement.hidden = false;
+            // progressElement.value = parseInt(m[2])*100;
+            // progressElement.max = parseInt(m[4])*100;
+            // progressElement.hidden = false;
+            // spinnerElement.hidden = false;
           } else {
-            progressElement.value = null;
-            progressElement.max = null;
-            progressElement.hidden = true;
-            if (!text) spinnerElement.style.display = 'none';
+            // progressElement.value = null;
+            // progressElement.max = null;
+            // progressElement.hidden = true;
+            // if (!text) spinnerElement.style.display = 'none';
           }
           statusElement.innerHTML = text;
         },
@@ -104,7 +105,7 @@
       window.onerror = function(event) {
         // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
         Module.setStatus('Exception thrown, see JavaScript console');
-        spinnerElement.style.display = 'none';
+        // spinnerElement.style.display = 'none';
         Module.setStatus = function(text) {
           if (text) console.error('[post-exception status] ' + text);
         };
@@ -153,7 +154,7 @@
       if (fileName == "") {
         args.push("edit.wasm")
       }else{
-        args.push("/" + fileName)
+        args.push(fileName)
       }
       param1 = document.getElementById("parameter1").value;
       param2 = document.getElementById("parameter2").value;

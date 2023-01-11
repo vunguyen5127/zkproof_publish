@@ -21,7 +21,7 @@ export class ZkaasComponent implements OnInit {
   }
 
   selectedTab(event): void{
-    console.log('event: ', event);
+    // console.log('event: ', event);
     this.zeroKnowledService(event.index);
   }
 
