@@ -17,12 +17,12 @@
   <div>
     <table>
       <tr>
-        <tr>
-          <td class="zk_td_custom">ZK statement (WASM file):</td>
-          <td><input type="file" id="wasmUpload" name="wasmUpload" class="fileUpload"></td>
-        </tr>
-        <td class="zk_td_custom">Witness (Input 1):</td>
-        <td><input type="text" id="parameter1" placeholder="Input 1"></td>
+      <tr>
+        <td class="zk_td_custom">ZK statement (WASM file):</td>
+        <td><input type="file" id="wasmUpload" name="wasmUpload" class="fileUpload"></td>
+      </tr>
+      <td class="zk_td_custom">Witness (Input 1):</td>
+      <td><input type="text" id="parameter1" placeholder="Input 1"></td>
       </tr>
       <tr>
         <td class="zk_td_custom">Witness (Input 1):</td>
@@ -30,7 +30,7 @@
       </tr>
       <tr>
         <td class="zk_td_custom">Upload Proof:</td>
-        <td ><input type="file" id="uploadProof" name="uploadProof" class="fileUpload"></td>
+        <td><input type="file" id="proofUpload" name="proofUpload" class="fileUpload"></td>
       </tr>
       <tr>
         <td><button class="button" type="button" onclick="zkVerifier()">Verify</button></td>
@@ -116,6 +116,12 @@
   </script>
   <!-- <button onclick="doupload()" name="submit">Upload File</button> -->
   <script>
+    var isWasmDone = false;
+
+    var wasmUpload = document.getElementById('wasmUpload');
+    var proofUpload = document.getElementById('proofUpload');
+    proofUpload.disabled = true;
+
     function readSingleFile(e) {
       var file = e.target.files[0];
       fileName = file.name;
@@ -129,22 +135,28 @@
         Module['FS'].writeFile(fileName, int8a);
 
         // to do something:
-        arguments_.push(fileName);
-        //callMain(arguments_);
+        // arguments_.push(fileName);
+        // callMain(arguments_);
         // shouldRunNow = true;
         //  run();
+
       };
       reader.readAsArrayBuffer(file);  // Blob object
+
+      if (e.target.id == "wasmUpload") {
+        proofUpload.disabled = false;
+        arguments_.push(fileName);
+      }
     }
 
-    document.getElementById('wasmUpload').addEventListener('change', readSingleFile, false);
-    document.getElementById('uploadProof').addEventListener('change', readSingleFile, false);
-	  
-    function zkVerifier(){
+    wasmUpload.addEventListener('change', readSingleFile, false);
+    proofUpload.addEventListener('change', readSingleFile, false);
+
+    function zkVerifier() {
       param1 = document.getElementById("parameter1").value;
       param2 = document.getElementById("parameter2").value;
-      if(param1 !="") arguments_.push(param1);
-      if(param2 !="") arguments_.push(param2);
+      if (param1 != "") arguments_.push(param1);
+      if (param2 != "") arguments_.push(param2);
       callMain(arguments_);
     }
   </script>
